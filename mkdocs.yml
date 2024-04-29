@@ -51,14 +51,3 @@ markdown_extensions:
   - pymdownx.superfences:
       custom_fences:
         - name: mermaid
-          class: mermaid
-          format: !!python/name:pymdownx.superfences.fence_code_format
-
-plugins:
-  - swagger-ui-tag
-  - mermaid2
-  - enumerate-headings:
-     exclude:
-       - index.md
-       - glossary.md
-  - glightbox
