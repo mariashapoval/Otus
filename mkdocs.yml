@@ -62,7 +62,6 @@ nav:
     - index.md
   - Документация:
     - glossary.md
-    - api.md
     - general_info.md
     - goal.md
     - about_object.md
@@ -71,3 +70,4 @@ nav:
     - information_model.md
     - architecture.md
     - ui.md
+    - api.md
