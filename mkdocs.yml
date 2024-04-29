@@ -8,15 +8,20 @@ repo_url: https://github.com/mariashapoval/Otus
 theme:
   name: material
   features:
-    - navigation.tabs
-    - navigation.sections
-    - toc.integrate
-    - navigation.top
-    - search.suggest
-    - search.highlight
-    - content.tabs.link
-    - content.code.annotation
-    - content.code.copy
+    - navigation.instant # Мгновенная загрузка
+    - navigation.tracking # Когда отслеживание привязки включено, URL-адрес в адресной строке автоматически обновляется активным привязкой, как выделено в оглавлении. 
+    - navigation.expand # Автоматическое открытие подразделов на панели слева
+    - navigation.path # Над заголовком каждой страницы отображается путь
+    - navigation.top # Кнопка «назад-вверх»
+    - navigation.footer # Переключение кнопками предыдущей/следующей страницы в футере
+    - navigation.tabs # Навигационные вкладки
+    - navigation.sections # Отображение верхних вкладок на панели слева
+    - navigation.indexes # Скрыть дублирование заголовка на панели слева.
+    - toc.integrate # Интеграция подразделов в панель слева
+    - toc.follow # Автоматическая прокрутка боковой панели при прокрутке
+    - search.highlight # Подсветка вхождений в тексте
+    - search.suggest # Автозавершение поискового запроса
+    - content.code.copy # Кнопка копирования кода
   language: en
   palette:
     - scheme: default
