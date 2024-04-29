@@ -56,3 +56,11 @@ markdown_extensions:
   - pymdownx.superfences:
       custom_fences:
         - name: mermaid
+
+nav:
+  - Домашняя страница:
+    - index.md
+  - Документация:
+    - glossary.md
+    - architecture.md
+    - api.md
