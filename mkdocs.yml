@@ -3,7 +3,7 @@ site_name: Проектирование информационной систе�
 
 # Repository
 repo_name: mariashapoval/Otus
-repo_url: https://mariashapoval.github.io/Otus/
+repo_url: https://github.com/mariashapoval/Otus
 
 theme:
   custom_dir: 'theme'
