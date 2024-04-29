@@ -1,3 +1,9 @@
+plugins:
+  - search:
+      separator: '[\s\-,:!=\[\]()"/]+|(?!\b)(?=[A-Z][a-z])|\.(?!\d)|&[lg]t;'
+  - plantuml
+  - swagger-ui-tag
+
 # Project information
 site_name: Проектирование информационной системы для сети роботизированных ресторанов "Робот и точка"
 
@@ -8,20 +14,19 @@ repo_url: https://github.com/mariashapoval/Otus
 theme:
   name: material
   features:
-    - navigation.instant # Мгновенная загрузка
-    - navigation.tracking # Когда отслеживание привязки включено, URL-адрес в адресной строке автоматически обновляется активным привязкой, как выделено в оглавлении. 
-    - navigation.expand # Автоматическое открытие подразделов на панели слева
-    - navigation.path # Над заголовком каждой страницы отображается путь
-    - navigation.top # Кнопка «назад-вверх»
-    - navigation.footer # Переключение кнопками предыдущей/следующей страницы в футере
-    - navigation.tabs # Навигационные вкладки
-    # - navigation.sections # Отображение верхних вкладок на панели слева
-    - navigation.indexes # Скрыть дублирование заголовка на панели слева.
-    - toc.integrate # Интеграция подразделов в панель слева
-    - toc.follow # Автоматическая прокрутка боковой панели при прокрутке
-    - search.highlight # Подсветка вхождений в тексте
-    - search.suggest # Автозавершение поискового запроса
-    - content.code.copy # Кнопка копирования кода
+    - navigation.instant
+    - navigation.tracking
+    - navigation.expand
+    - navigation.path
+    - navigation.top
+    - navigation.footer
+    - navigation.tabs
+    - navigation.indexes
+    - toc.integrate
+    - toc.follow
+    - search.highlight
+    - search.suggest
+    - content.code.copy
   language: ru
   palette:
     - scheme: pink
