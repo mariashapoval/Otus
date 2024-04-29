@@ -3,10 +3,6 @@ plugins:
       separator: '[\s\-,:!=\[\]()"/]+|(?!\b)(?=[A-Z][a-z])|\.(?!\d)|&[lg]t;'
   - swagger-ui-tag
   - mermaid2
-  - enumerate-headings:
-      exclude:
-        - index.md
-        - glossary.md
   - glightbox      
 
 # Project information
