@@ -33,6 +33,9 @@ theme:
       accent: lime
 
 markdown_extensions:
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
   - pymdownx.highlight:
       anchor_linenums: true
   - pymdownx.inlinehilite
@@ -45,9 +48,6 @@ markdown_extensions:
   - pymdownx.superfences
   - pymdownx.mark
   - attr_list
-  - pymdownx.emoji:
-      emoji_index: !!python/name:materialx.emoji.twemoji
-      emoji_generator: !!python/name:materialx.emoji.to_svg
   - pymdownx.superfences:
       custom_fences:
         - name: mermaid
@@ -57,26 +57,8 @@ markdown_extensions:
 plugins:
   - swagger-ui-tag
   - mermaid2
-  - build_plantuml:
-     render: 'server'
-     bin_path: '/usr/local/bin/plantuml'
-     server: 'http://www.plantuml.com/plantuml'
-     disable_ssl_certificate_validation: true
-     output_format: 'svg'
-     diagram_root: 'docs/diagrams'
-     output_folder: 'out'
-     input_folder: 'src'
-     input_extensions: ''
   - enumerate-headings:
      exclude:
        - index.md
        - glossary.md
   - glightbox
-
-nav:
-  - Домашняя страница:
-    - index.md
-  - Документация:
-    - glossary.md
-    - architecture.md
-    - api.md
