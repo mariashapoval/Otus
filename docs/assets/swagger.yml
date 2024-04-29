@@ -3,12 +3,12 @@ openapi: 3.0.0
 info:
   title: 'Api '
   description: API для заказа блюд через приложение
-  version: '13033'
+  version: v1
 servers:
-  - url: https://virtserver.swaggerhub.com/MARIASHAPOVAL95/Specification/1
-    description: SwaggerHub API Auto Mocking
-  - url: https://virtserver.swaggerhub.com/cottoffeus/Dot_Eats/1
-    description: SwaggerHub API Auto Mocking
+  - url: https://test.swaggerhub.com/MARIASHAPOVAL95/Specification/v1
+    description: Prod
+  - url: https://prod.swaggerhub.com/MARIASHAPOVAL95/Specification/v1
+    description: Test
 paths:
   /auth/login:
     post:
@@ -605,4 +605,4 @@ components:
       type: http
       scheme: bearer
       bearerFormat: JWT
- ---
+      ---
