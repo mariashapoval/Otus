@@ -1,0 +1,88 @@
+# Project information
+site_name: Проектирование информационной системы для сети роботизированных ресторанов "Робот и точка"
+
+# Repository
+repo_name: mariashapoval/Otus
+repo_url: https://mariashapoval.github.io/Otus/
+
+theme:
+  name: material
+  palette:
+    # Светлая тема
+    - scheme: default
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: Switch to dark mode
+      primary: "#880E4F"  # Темно-розовый
+      accent: "#5D4037"   # Коричневый
+      background: "#1565C0"  # Синий
+
+    # Ночная тема  
+    - scheme: slate
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to light mode
+      primary: "#880E4F"  # Темно-розовый
+      accent: "#5D4037"   # Коричневый
+      background: "#1565C0"  # Синий
+
+  font:
+    text: Roboto
+    code: Roboto Mono
+  language: ru
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.expand
+    - navigation.path
+    - navigation.top
+    - navigation.footer
+    - navigation.tabs
+    - navigation.indexes
+    - toc.integrate
+    - toc.follow
+    - search.highlight
+    - search.suggest
+    - content.code.copy
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - admonition
+  - pymdownx.arithmatex:
+      generic: true
+  - footnotes
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.mark
+  - attr_list
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+
+plugins:
+  - swagger-ui-tag
+  - mermaid2
+  - search:
+     separator: '[\s\-,:!=\[\]()"/]+|(?!\b)(?=[A-Z][a-z])|\.(?!\d)|&[lg]t;'
+  - build_plantuml:
+     render: 'server'
+     bin_path: '/usr/local/bin/plantuml'
+     server: 'http://www.plantuml.com/plantuml'
+     disable_ssl_certificate_validation: true
+     output_format: 'svg'
+     diagram_root: 'docs/diagrams'
+     output_folder: 'out'
+     input_folder: 'src'
+     input_extensions: ''
+
+nav:
+  - Домашняя страница:
+    - index.md
