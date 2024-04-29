@@ -3,7 +3,7 @@ plugins:
       separator: '[\s\-,:!=\[\]()"/]+|(?!\b)(?=[A-Z][a-z])|\.(?!\d)|&[lg]t;'
   - swagger-ui-tag
   - mermaid2
-  - glightbox      
+ # - glightbox      
 
 # Project information
 site_name: Проектирование информационной системы для сети роботизированных ресторанов "Робот и точка"
