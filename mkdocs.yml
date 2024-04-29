@@ -4,6 +4,7 @@ site_name: Проектирование информационной систе�
 # Repository
 repo_name: mariashapoval/Otus
 repo_url: https://github.com/mariashapoval/Otus
+
 theme:
   name: material
   features:
@@ -54,20 +55,28 @@ markdown_extensions:
           format: !!python/name:pymdownx.superfences.fence_code_format
 
 plugins:
-   - swagger-ui-tag
-   - mermaid2
-   - build_plantuml:
-     render: 'server' # or "local" for local rendering
-     bin_path: '/usr/local/bin/plantuml' # ignored when render: server
-     server: 'http://www.plantuml.com/plantuml' # official plantuml server
-     disable_ssl_certificate_validation: true # for self-signed and invalid certs
-     output_format: 'svg' # or "png"
-     diagram_root: 'docs/diagrams' # should reside under docs_dir
+  - swagger-ui-tag
+  - mermaid2
+  - build_plantuml:
+     render: 'server'
+     bin_path: '/usr/local/bin/plantuml'
+     server: 'http://www.plantuml.com/plantuml'
+     disable_ssl_certificate_validation: true
+     output_format: 'svg'
+     diagram_root: 'docs/diagrams'
      output_folder: 'out'
      input_folder: 'src'
-     input_extensions: '' # comma separated list of extensions to parse, by default every file is parsed
+     input_extensions: ''
   - enumerate-headings:
      exclude:
        - index.md
        - glossary.md
   - glightbox
+
+nav:
+  - Домашняя страница:
+    - index.md
+  - Документация:
+    - glossary.md
+    - architecture.md
+    - api.md
