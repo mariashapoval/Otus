@@ -67,6 +67,7 @@ nav:
   - Домашняя страница:
     - index.md
   - Документация:
+    - index.md
     - glossary.md
     - general_info.md
     - goal.md
