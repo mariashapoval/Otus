@@ -1,7 +1,7 @@
 plugins:
   - search:
       separator: '[\s\-,:!=\[\]()"/]+|(?!\b)(?=[A-Z][a-z])|\.(?!\d)|&[lg]t;'
-  - plantuml
+  - macros
   - swagger-ui-tag
 
 # Project information
