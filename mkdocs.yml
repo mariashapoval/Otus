@@ -9,7 +9,7 @@ theme:
   name: material
   features:
     - navigation.instant # Мгновенная загрузка
-    - navigation.tracking # Когда отслеживание привязки включено, URL-адрес в адресной строке автоматически обновляется активным привязкой, как выделено в оглавлении. 
+    - navigation.tracking # Когда отслеживание привязки включено, URL-адрес в адресной строке автоматически обновляется активным привязкой, как выделено в оглавлении.
     - navigation.expand # Автоматическое открытие подразделов на панели слева
     - navigation.path # Над заголовком каждой страницы отображается путь
     - navigation.top # Кнопка «назад-вверх»
@@ -60,20 +60,20 @@ markdown_extensions:
           format: !!python/name:pymdownx.superfences.fence_code_format
 
 plugins:
-   - swagger-ui-tag
-   - mermaid2
-   - build_plantuml:
-      render: 'server' # or "local" for local rendering
-      bin_path: '/usr/local/bin/plantuml' # ignored when render: server
-      server: 'http://www.plantuml.com/plantuml' # official plantuml server
-      disable_ssl_certificate_validation: true # for self-signed and invalid certs
-      output_format: 'svg' # or "png"
-      diagram_root: 'docs/diagrams' # should reside under docs_dir
-      output_folder: 'out'
-      input_folder: 'src'
-      input_extensions: '' # comma separated list of extensions to parse, by default every file is parsed
+  - swagger-ui-tag
+  - mermaid2
+  - build_plantuml:
+     render: 'server' # or "local" for local rendering
+     bin_path: '/usr/local/bin/plantuml' # ignored when render: server
+     server: 'http://www.plantuml.com/plantuml' # official plantuml server
+     disable_ssl_certificate_validation: true # for self-signed and invalid certs
+     output_format: 'svg' # or "png"
+     diagram_root: 'docs/diagrams' # should reside under docs_dir
+     output_folder: 'out'
+     input_folder: 'src'
+     input_extensions: '' # comma separated list of extensions to parse, by default every file is parsed
   - enumerate-headings:
-      exclude:
-        - index.md
-        - glossary.md
+     exclude:
+       - index.md
+       - glossary.md
   - glightbox
