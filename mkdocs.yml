@@ -62,7 +62,6 @@ nav:
     - index.md
   - Документация:
     - glossary.md
-    - architecture.md
     - api.md
     - general_info.md
     - goal.md
@@ -70,3 +69,5 @@ nav:
     - business_process.md
     - sr.md
     - information_model.md
+    - architecture.md
+    - ui.md
