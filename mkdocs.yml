@@ -87,3 +87,6 @@ plugins:
 nav:
   - Домашняя страница:
     - index.md
+  - Документация:  
+    - architecture.md
+    - api.md
