@@ -6,6 +6,7 @@ repo_name: mariashapoval/Otus
 repo_url: https://mariashapoval.github.io/Otus/
 
 theme:
+  custom_dir: 'theme'
   name: material
   palette:
     # Светлая тема
@@ -20,12 +21,12 @@ theme:
     # Ночная тема  
     - scheme: slate
       toggle:
-        icon: material/toggle-switch
+        icon: material/toggle-switch-off-outline
         name: Switch to light mode
-      primary: "#880E4F"  # Темно-розовый
-      accent: "#5D4037"   # Коричневый
-      background: "#1565C0"  # Синий
-
+      primary: "#FF5733"  # Оранжевый
+      accent: "#2E86C1"   # Голубой
+      background: "#F4D03F"  # Желтый
+      
   font:
     text: Roboto
     code: Roboto Mono
