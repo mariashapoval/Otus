@@ -1,10 +1,3 @@
-# Project information
-site_name: Проектирование информационной системы для сети роботизированных ресторанов "Робот и точка"
-
-# Repository
-repo_name: mariashapoval/Otus
-repo_url: https://github.com/mariashapoval/Otus
-
 theme:
   name: material
   features:
@@ -22,20 +15,20 @@ theme:
     - search.highlight # Подсветка вхождений в тексте
     - search.suggest # Автозавершение поискового запроса
     - content.code.copy # Кнопка копирования кода
-  language: en
+  language: ru
   palette:
-    - scheme: default
-      toggle:
-        icon: material/toggle-switch-off-outline
-        name: Switch to dark mode
-      primary: teal
-      accent: purple
-    - scheme: slate
+    - scheme: light_pink
       toggle:
         icon: material/toggle-switch
+        name: Switch to night mode
+      primary: pink
+      accent: white
+    - scheme: dark_purple
+      toggle:
+        icon: material/toggle-switch-off-outline
         name: Switch to light mode
-      primary: teal
-      accent: lime
+      primary: purple
+      accent: lavender
 
 markdown_extensions:
   - pymdownx.highlight:
