@@ -1,4 +1,10 @@
-site_name: My test CI\CD for Documentations
+# Project information
+site_name: Проектирование информационной системы для сети роботизированных ресторанов "Робот и точка"
+
+# Repository
+repo_name: mariashapoval/Otus
+repo_url: https://github.com/mariashapoval/Otus
+
 theme:
   name: material
   features:
