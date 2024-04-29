@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - main
+      - master
 permissions:
   contents: write
 
@@ -20,7 +21,7 @@ jobs:
           path: .cache
       - run: pip install mkdocs-material
       - run: pip install mkdocs-mermaid2-plugin
-      - run: pip install mkdocs-build-plantuml-plugin
       - run: pip install pillow cairosvg
       - run: pip install beautifulsoup4>=4.11.1
       - run: pip install mkdocs-swagger-ui-tag      # Render Swagger
+      - run: mkdocs gh-deploy --force
