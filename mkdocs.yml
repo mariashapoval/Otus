@@ -70,3 +70,11 @@ plugins:
        - index.md
        - glossary.md
   - glightbox
+
+nav:
+  - Домашняя страница:
+    - index.md
+  - Документация:
+    - glossary.md
+    - architecture.md
+    - api.md
