@@ -1,0 +1,57 @@
+@startuml
+' Концептуальная модель данных
+skinparam linetype ortho
+
+entity "Пользователь" {
+    + ID : int
+    - Имя : string
+    - Email : string
+}
+
+entity "Заказ" {
+    + ID : int
+    - ПользовательID : int
+    - Статус : string
+    - Дата : datetime
+}
+
+entity "Блюдо" {
+    + ID : int
+    - Название : string
+    - Цена : decimal
+}
+
+entity "Столик" {
+    + ID : int
+    - Вместимость : int
+}
+
+entity "Оплата" {
+    + ID : int
+    - ЗаказID : int
+    - Сумма : decimal
+    - Статус : string
+}
+
+entity "Отзыв" {
+    + ID : int
+    - ПользовательID : int
+    - ЗаказID : int
+    - Текст : string
+    - Рейтинг : int
+}
+
+entity "Меню" {
+    + ID : int
+    - БлюдоID : int
+}
+
+' Взаимосвязи
+Пользователь ||--o{ Заказ : "размещает"
+Заказ ||--o{ Блюдо : "включает"
+Заказ ||--o{ Оплата : "производит"
+Заказ ||--o{ Отзыв : "получает"
+Меню ||--o{ Блюдо : "содержит"
+Столик ||--o{ Заказ : "принимает"
+
+@enduml
