@@ -1,0 +1,63 @@
+@startuml
+' Логическая модель данных
+skinparam linetype ortho
+
+entity "Пользователь" {
+    + id : integer [PK]
+    - имя : string
+    - email : string
+    - пароль : string
+}
+
+entity "Заказ" {
+    + id : integer [PK]
+    - пользователь_id : integer [FK]
+    - столик_id : integer [FK]
+    - статус : string
+    - дата : datetime
+    - сумма : decimal
+}
+
+entity "Блюдо" {
+    + id : integer [PK]
+    - меню_id : integer [FK]
+    - название : string
+    - цена : decimal
+}
+
+entity "Столик" {
+    + id : integer [PK]
+    - номер : string
+    - вместимость : integer
+}
+
+entity "Оплата" {
+    + id : integer [PK]
+    - заказ_id : integer [FK]
+    - сумма : decimal
+    - статус : string
+    - дата : datetime
+}
+
+entity "Отзыв" {
+    + id : integer [PK]
+    - пользователь_id : integer [FK]
+    - заказ_id : integer [FK]
+    - текст : string
+    - рейтинг : integer
+    - дата : datetime
+}
+
+entity "Меню" {
+    + id : integer [PK]
+}
+
+' Связи
+Пользователь ||--o{ Заказ
+Пользователь ||--o{ Отзыв
+Меню ||--o{ Блюдо
+Заказ ||--o{ Оплата
+Заказ ||--o{ Отзыв
+Столик ||--o{ Заказ
+
+@enduml
