@@ -1,0 +1,75 @@
+@startuml
+left to right direction
+
+actor "Менеджер по гостеприимству" as hospManager
+actor "Менеджер по ассортименту" as assortmentManager
+actor "Пользователь" as fl
+actor "Робот" as robot
+actor "Технолог" as technologist
+
+rectangle "Система автоматизированного ресторана" {
+    ' Пользователь
+    usecase (UC-1: Регистрация пользователя) as regFl
+    usecase (UC-2: Отмена регистрации пользователя) as cancelRegFl
+    usecase (UC-3: Аутентификация пользователя) as authFl
+    usecase (UC-4: Выбор ресторана) as searchRest
+    usecase (UC-5: Бронирование столиков из списка) as bookingTableList
+    usecase (UC-6: Бронирование столиков по количеству гостей) as bookingTableGuest
+    usecase (UC-7: Бронирование столиков на схеме расположения столиков) as bookingTableMap
+    usecase (UC-8: Просмотр бронирований) as bookingView
+    usecase (UC-9: Отмена бронирования) as bookingCancel
+
+    ' Менеджер по гостеприимству
+    usecase (UC-10: Оформление возврата) as refund
+    usecase (UC-11: Обработка технических сбоев) as techIssues
+    usecase (UC-12: Снятие позиций с меню) as removeMenuItem
+
+    ' Менеджер по ассортименту
+    usecase (UC-13: Внесение новых позиций в меню) as addMenuItem
+    usecase (UC-14: Изменение цен) as changePrice
+    usecase (UC-15: Маркетинговые акции и специальные предложения) as marketing
+    usecase (UC-16: Настройка комплексных предложений) as setupOffers
+    usecase (UC-17: Настройка технологических карт) as setupRecipes
+
+    ' Технолог
+    usecase (UC-18: Закупка и хранение продуктов) as purchaseStorage
+    usecase (UC-19: Обслуживание роботов) as robotMaintenance
+
+    ' Робот
+    usecase (UC-20: Приготовление блюд) as cooking
+    usecase (UC-21: Обслуживание посетителей) as serving
+    usecase (UC-22: Отправка информации о запасах) as stockInformation
+
+    hospManager -- refund
+    hospManager -- techIssues
+    hospManager -- removeMenuItem
+
+    assortmentManager -- addMenuItem
+    assortmentManager -- changePrice
+    assortmentManager -- marketing
+    assortmentManager -- setupOffers
+    assortmentManager -- setupRecipes
+
+    technologist -- purchaseStorage
+    technologist -- robotMaintenance
+
+    robot -- cooking
+    robot -- serving
+    robot -- stockInformation
+
+    fl -- regFl
+    fl -- bookingView
+    fl -- searchRest
+    regFl <.. cancelRegFl : extend
+    searchRest <.. bookingTableList : extend
+    searchRest <.. bookingTableGuest : extend
+    searchRest <.. bookingTableMap : extend
+    bookingView <.. bookingCancel : extend
+    bookingView ..> authFl : include
+    bookingTableList ..> authFl : include
+    bookingTableGuest ..> authFl : include
+    bookingTableMap ..> authFl : include
+
+    robot -- techIssues
+}
+@enduml
