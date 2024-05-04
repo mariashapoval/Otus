@@ -1,0 +1,85 @@
+@startuml
+skinparam linetype ortho
+
+' Основные сущности
+entity "Пользователи" {
+    + id : int [PK]
+    - имя : varchar(255)
+    - email : varchar(255) [UQ]
+    - пароль : varchar(255)
+}
+
+entity "Заказы" {
+    + id : int [PK]
+    - пользователь_id : int [FK]
+    - статус : varchar(100)
+    - дата_заказа : datetime
+    - общая_сумма : decimal(15,2)
+}
+
+entity "Столики" {
+    + id : int [PK]
+    - номер : varchar(50)
+    - вместимость : int
+}
+
+entity "Меню" {
+    + id : int [PK]
+    - название : varchar(255)
+    - описание : text
+}
+
+' Расширенные сущности
+entity "Блюда" {
+    + id : int [PK]
+    - название : varchar(255)
+    - цена : decimal(10,2)
+    - описание : text
+}
+
+entity "Ингредиенты" {
+    + id : int [PK]
+    - название : varchar(255)
+    - количество_на_складе : int
+    - минимальный_запас : int
+}
+
+entity "Рецепты" {
+    + id : int [PK]
+    - блюдо_id : int [FK]
+    - ингредиент_id : int [FK]
+    - количество : decimal(10,2)
+}
+
+entity "Оплаты" {
+    + id : int [PK]
+    - заказ_id : int [FK]
+    - сумма : decimal(15,2)
+    - дата_оплаты : datetime
+}
+
+entity "Отзывы" {
+    + id : int [PK]
+    - пользователь_id : int [FK]
+    - блюдо_id : int [FK]
+    - рейтинг : int
+    - текст : text
+}
+
+entity "Персонал" {
+    + id : int [PK]
+    - имя : varchar(255)
+    - должность : varchar(255)
+    - зарплата : decimal(15,2)
+}
+
+' Связи
+Пользователи ||--o{ Заказы
+Меню ||--o{ Блюда
+Заказы ||--o{ Оплаты
+Блюда ||--o{ Рецепты
+Ингредиенты ||--o{ Рецепты
+Блюда ||--o{ Отзывы
+Заказы ||--o{ Столики
+
+@enduml
