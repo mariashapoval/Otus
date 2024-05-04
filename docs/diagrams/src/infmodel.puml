@@ -1,0 +1,95 @@
+@startuml
+left to right direction
+skinparam linetype polyline
+
+entity Пользователь {
+    * ID : int
+    * Имя : string
+    * Email : string
+    * Пароль : string
+    --
+}
+
+entity Меню {
+    * ID : int
+    * Название : string
+    * Описание : string
+    * Цена : double
+    --
+}
+
+entity Заказ {
+    * ID : int
+    * ПользовательID : int
+    * СтоликID : int
+    * Статус : string
+    * Время заказа : datetime
+    * Сумма : double
+    --
+}
+
+entity Столик {
+    * ID : int
+    * Номер : string
+    * Вместимость : int
+    --
+}
+
+entity Робот {
+    * ID : int
+    * Тип : string
+    * Статус : string
+    --
+}
+
+entity Программа_лояльности {
+    * ID : int
+    * ПользовательID : int
+    * Баллы : int
+    --
+}
+
+entity Авторизация {
+    * ID : int
+    * ПользовательID : int
+    * Время входа : datetime
+    * Время выхода : datetime
+    * IP : string
+    --
+}
+
+entity Ингредиент {
+    * ID : int
+    * Название : string
+    * Срок годности : date
+    --
+}
+
+entity Рецепт {
+    * ID : int
+    * МенюID : int
+    * ИнгредиентID : int
+    * Количество : double
+    --
+}
+
+entity Статистика_использования {
+    * ID : int
+    * Функция : string
+    * ПользовательID : int
+    * Дата использования : datetime
+    --
+}
+
+' Связи
+Пользователь ||--o{ Заказ
+Пользователь ||--o{ Программа_лояльности
+Пользователь ||--o{ Авторизация
+Меню ||--o{ Заказ
+Меню ||--o{ Рецепт
+Ингредиент ||--o{ Рецепт
+Столик ||--o{ Заказ
+Робот "1" --o "много" Заказ : "Обслуживает"
+Пользователь ||--o{ Статистика_использования
+
+@enduml
