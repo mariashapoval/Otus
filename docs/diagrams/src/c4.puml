@@ -1,0 +1,64 @@
+@startuml Detailed_C4_Model
+
+!include <C4/C4_Context.puml>
+!include <C4/C4_Container.puml>
+!include <C4/C4_Component.puml>
+
+' Контекстная диаграмма
+LAYOUT_WITH_LEGEND()
+
+Person(visitor, "Посетитель ресторана", "Использует систему для заказа еды и взаимодействия с роботами.")
+Person(hospManager, "Менеджер по гостеприимству", "Отвечает за качество обслуживания клиентов.")
+Person(assortmentManager, "Менеджер по ассортименту", "Управляет меню и акциями.")
+Person(technologist, "Технолог", "Отвечает за поддержку и интеграцию роботизированного оборудования.")
+System(robotics, "Роботизированная система", "Автоматизирует сервировку и подготовку блюд.")
+
+System_Ext(paymentGateway, "Платежная система", "Интеграция платежных операций")
+System_Ext(loyaltySystem, "Система лояльности", "Управляет программами лояльности и скидками")
+System_Ext(supplyChainSystem, "Система управления поставками", "Координирует поставки продуктов и инвентаря")
+
+' Контейнерная диаграмма
+System_Boundary(c2, "Роботизированная система") {
+    Container(webApp, "Веб-приложение", "Angular", "Позволяет клиентам оформлять заказы и следить за ними в реальном времени.")
+    Container(mobileApp, "Мобильное приложение", "React Native", "Обеспечивает доступ к функциям системы через мобильные устройства.")
+    Container(apiGateway, "API Gateway", "Node.js, Express", "Осуществляет маршрутизацию и балансировку запросов.")
+    Container(orderService, "Сервис Заказов", "Java, Spring Boot", "Принимает и обрабатывает заказы от клиентов.")
+    Container(loyaltyService, "Сервис Лояльности", "Python, Django", "Управляет акциями и программами лояльности.")
+    ContainerDb(db, "База данных", "PostgreSQL", "Хранит все данные системы, включая пользователей и заказы.")
+
+    Rel(visitor, webApp, "Использует")
+    Rel(visitor, mobileApp, "Использует")
+    Rel(webApp, apiGateway, "Соединяется через")
+    Rel(mobileApp, apiGateway, "Соединяется через")
+    Rel(apiGateway, orderService, "Маршрутизирует запросы")
+    Rel(apiGateway, loyaltyService, "Маршрутирует запросы")
+    Rel(orderService, db, "Читает и записывает")
+    Rel(loyaltyService, db, "Читает и записывает")
+}
+
+' Компонентная диаграмма
+Container_Boundary(c3, "Сервис Заказов") {
+    Component(orderProcessing, "Обработчик Заказов", "Обрабатывает входящие заказы и координирует их выполнение.")
+    Component(paymentProcessing, "Обработчик Платежей", "Обрабатывает транзакции и интегрируется с платежной системой.")
+   Component(inventoryManagement, "Управление Запасами", "Координирует закупки и контролирует запасы ингредиентов и материалов.")
+    Container(restaurantManagementService, "Сервис Управления Рестораном", "C#, .NET", "Обеспечивает функции управления рестораном, включая обслуживание и роботов.")
+    Container(roboticsControlService, "Сервис Контроля Роботов", "Python, Flask", "Управляет и мониторит действия роботов в ресторане.")
+    ContainerDb(restaurantDb, "База данных ресторана", "Oracle", "Хранит все данные о действиях ресторана, включая логи роботов и транзакции.")
+
+    Rel(orderProcessing, paymentProcessing, "Интеграция для оплаты")
+    Rel(orderProcessing, inventoryManagement, "Запрашивает состояние запасов")
+    Rel(restaurantManagementService, roboticsControlService, "Управляет роботами")
+    Rel(restaurantManagementService, restaurantDb, "Читает и записывает данные")
+}
+
+' Связи между системами и пользователями
+Rel_D(hospManager, restaurantManagementService, "Использует для управления рестораном")
+Rel_D(assortmentManager, restaurantManagementService, "Использует для управления меню")
+Rel_D(technologist, roboticsControlService, "Использует для мониторинга и технического обслуживания")
+
+' Внешние интеграции
+Rel_D(orderService, paymentGateway, "Интеграция для обработки платежей")
+Rel_D(orderService, loyaltySystem, "Интеграция для управления лояльностью")
+Rel_D(orderService, supplyChainSystem, "Интеграция для управления запасами и поставками")
+
+@enduml
