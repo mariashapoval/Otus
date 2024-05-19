@@ -2,82 +2,85 @@
 openapi: 3.0.0
 info:
   title: API системы управления заказами ресторана "Робот и точка"
-  version: 1.0.0
+  version: 1.0.2
   description: Спецификация разработана в рамках курсового проекта по курсу "Системный аналитик.Advanced" в Otus. Данный пример предназначен для системы управления заказами в ресторане "Робот и точка".
   contact:
     name: 'Maria Shapoval'
     email: "maria.shapoval95@gmail.com"
 servers:
-  - url: https://api.robotdot.com/v1
-    description: prod
-  - url: https://api-test.robotdot.com/v1
-    description: test    
-tags:
-  - name: Пользователи
-    description: Работа с пользователями
-  - name: Меню
-    description: Операции, связанные с пунктами меню
-  - name: Заказы
-    description: Операции, связанные с заказами клиентов
+  # Added by API Auto Mocking Plugin
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/mariashapoval/course_project/1.0.2
+  - url: http://api.robot-point.com/v1
+    description: Production
+  - url: http://test.robot-point.com/v1
+    description: Test    
 
 paths:
-  /users/login:
+  /users:
     post:
+      summary: Регистрация пользователя
       tags:
         - Пользователи
-      summary: Авторизация пользователя
-      description: Метод позволяет произвести авторизацию пользователя
+      operationId: registerUser
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Login'
+              $ref: '#/components/schemas/User'
+      responses:
+        '201':
+          description: Пользователь успешно зарегистрирован
+        '400':
+          description: Ошибка ввода данных
+    get:
+      summary: Получение списка пользователей
+      tags:
+        - Пользователи
+      operationId: getUsers
       responses:
         '200':
-          description: Успешная авторизация
+          description: Список пользователей
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
-        '401':
-          description: Неверные учетные данные
-        '500':
-          description: Внутренняя ошибка сервера
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
 
   /users/{userId}:
     get:
+      summary: Получение деталей пользователя
       tags:
         - Пользователи
-      summary: Получение информации о профиле пользователя
+      operationId: getUser
       parameters:
         - name: userId
           in: path
           required: true
           schema:
-            type: integer
+            type: string
       responses:
         '200':
-          description: Данные профиля пользователя
+          description: Детали пользователя
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
         '404':
           description: Пользователь не найден
-        '500':
-          description: Внутренняя ошибка сервера
-
     put:
+      summary: Обновление пользователя
       tags:
         - Пользователи
-      summary: Обновление информации профиля пользователя
+      operationId: updateUser
       parameters:
         - name: userId
           in: path
           required: true
           schema:
-            type: integer
+            type: string
       requestBody:
         required: true
         content:
@@ -86,165 +89,345 @@ paths:
               $ref: '#/components/schemas/User'
       responses:
         '200':
-          description: Профиль пользователя обновлен
+          description: Пользователь успешно обновлен
         '400':
-          description: Неверный запрос, данные не прошли валидацию
-        '404':
-          description: Пользователь не найден
-        '500':
-          description: Внутренняя ошибка сервера
-    patch:
+          description: Ошибка ввода данных
+    delete:
+      summary: Удаление пользователя
       tags:
         - Пользователи
-      summary: Обновление данных профиля пользователя
-      description: Метод позволяет внести частичное обновление в данные пользователя
+      operationId: deleteUser
       parameters:
         - name: userId
           in: path
           required: true
           schema:
-            type: integer
+            type: string
+      responses:
+        '204':
+          description: Пользователь успешно удален
+        '404':
+          description: Пользователь не найден
+
+  /users/login:
+    post:
+      summary: Вход в систему
+      tags:
+        - Пользователи
+      operationId: loginUser
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UserPatch'
+              type: object
+              properties:
+                phone:
+                  type: string
+                  example: "+79001234567"
       responses:
         '200':
-          description: Данные профиля пользователя обновлены    
-
-    delete:
-      tags:
-        - Пользователи
-      summary: Удаление пользователя
-      parameters:
-        - name: userId
-          in: path
-          required: true
-          schema:
-            type: integer
-      responses:
-        '204':
-          description: Пользователь удален
-        '404':
-          description: Пользователь не найден
-        '403':
-          description: Отказ в доступе, недостаточно прав для выполнения операции
-        '500':
-          description: Внутренняя ошибка сервера
+          description: Успешный вход
+        '401':
+          description: Неверный номер телефона
 
   /menu:
     get:
+      summary: Просмотр меню
       tags:
         - Меню
-      summary: Получение текущего меню
+      operationId: getMenu
       responses:
         '200':
-          description: Список пунктов меню
+          description: Текущее меню
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/MenuItem'
-        '500':
-          description: Внутренняя ошибка сервера
-
+                  $ref: '#/components/schemas/Dish'
     post:
+      summary: Обновление меню
       tags:
         - Меню
-      summary: Добавление нового блюда в меню
+      operationId: updateMenu
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/MenuItem'
+              $ref: '#/components/schemas/Dish'
+      responses:
+        '200':
+          description: Меню успешно обновлено
+        '400':
+          description: Ошибка ввода данных
+
+  /menu/{dishId}:
+    get:
+      summary: Получение информации о блюде
+      tags:
+        - Меню
+      operationId: getDish
+      parameters:
+        - name: dishId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Информация о блюде
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Dish'
+        '404':
+          description: Блюдо не найдено
+    put:
+      summary: Обновление информации о блюде
+      tags:
+        - Меню
+      operationId: updateDish
+      parameters:
+        - name: dishId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Dish'
+      responses:
+        '200':
+          description: Информация о блюде успешно обновлена
+        '400':
+          description: Ошибка ввода данных
+    delete:
+      summary: Удаление блюда
+      tags:
+        - Меню
+      operationId: deleteDish
+      parameters:
+        - name: dishId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Блюдо успешно удалено
+        '404':
+          description: Блюдо не найдено
+
+  /orders:
+    post:
+      summary: Создание заказа
+      tags:
+        - Заказы
+      operationId: createOrder
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Order'
       responses:
         '201':
-          description: Блюдо добавлено в меню
+          description: Заказ успешно создан
         '400':
-          description: Неверные данные блюда
-        '500':
-          description: Внутренняя ошибка сервера
+          description: Ошибка ввода данных
+    get:
+      summary: Получение списка заказов
+      tags:
+        - Заказы
+      operationId: getOrders
+      responses:
+        '200':
+          description: Список заказов
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Order'
 
   /orders/{orderId}:
     get:
+      summary: Получение деталей заказа
       tags:
         - Заказы
-      summary: Получение информации о заказе
+      operationId: getOrder
       parameters:
         - name: orderId
           in: path
           required: true
           schema:
-            type: integer
+            type: string
       responses:
         '200':
-          description: Информация о заказе
+          description: Детали заказа
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Order'
         '404':
           description: Заказ не найден
-        '500':
-          description: Внутренняя ошибка сервера
-
     put:
+      summary: Обновление заказа
       tags:
         - Заказы
-      summary: Обновление информации о заказе
+      operationId: updateOrder
       parameters:
         - name: orderId
           in: path
           required: true
           schema:
-            type: integer
+            type: string
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/OrderRequest'
+              $ref: '#/components/schemas/Order'
       responses:
         '200':
-          description: Заказ обновлен
+          description: Заказ успешно обновлен
         '400':
-          description: Неверный запрос, данные заказа не корректны
-        '404':
-          description: Заказ не найден
-        '500':
-          description: Внутренняя ошибка сервера
-
+          description: Ошибка ввода данных
     delete:
+      summary: Удаление заказа
       tags:
         - Заказы
-      summary: Удаление заказа
+      operationId: deleteOrder
       parameters:
         - name: orderId
           in: path
           required: true
           schema:
-            type: integer
+            type: string
       responses:
         '204':
           description: Заказ успешно удален
         '404':
           description: Заказ не найден
-        '403':
-          description: Отказ в доступе, недостаточно прав для выполнения операции
-        '500':
-          description: Внутренняя ошибка сервера
+
+  /reviews:
+    post:
+      summary: Оставить отзыв
+      tags:
+        - Отзывы
+      operationId: createReview
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Review'
+      responses:
+        '201':
+          description: Отзыв успешно создан
+        '400':
+          description: Ошибка ввода данных
+    get:
+      summary: Получение списка отзывов
+      tags:
+        - Отзывы
+      operationId: getReviews
+      responses:
+        '200':
+          description: Список отзывов
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Review'
+
+  /reviews/{reviewId}:
+    get:
+      summary: Получение деталей отзыва
+      tags:
+        - Отзывы
+      operationId: getReview
+      parameters:
+        - name: reviewId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Детали отзыва
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Review'
+        '404':
+          description: Отзыв не найден
+    put:
+      summary: Обновление отзыва
+      tags:
+        - Отзывы
+      operationId: updateReview
+      parameters:
+        - name: reviewId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Review'
+      responses:
+        '200':
+          description: Отзыв успешно обновлен
+        '400':
+          description: Ошибка ввода данных
+    delete:
+      summary: Удаление отзыва
+      tags:
+        - Отзывы
+      operationId: deleteReview
+      parameters:
+        - name: reviewId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Отзыв успешно удален
+        '404':
+          description: Отзыв не найден
 
 components:
   schemas:
-    MenuItem:
+    User:
       type: object
       properties:
         id:
           type: integer
+          format: int64
+        name:
+          type: string
+        phone:
+          type: string
+        orders:
+          type: string
+
+    Dish:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
         name:
           type: string
         description:
@@ -252,70 +435,56 @@ components:
         price:
           type: number
           format: float
-    OrderRequest:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            type: object
-            properties:
-              itemId:
-                type: integer
-              quantity:
-                type: integer
-        deliveryMode:
+        calories:
+          type: integer
+        ingredients:
           type: string
-          enum:
-            - самовывоз
-            - на месте
+
     Order:
       type: object
       properties:
-        orderId:
+        id:
           type: integer
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/MenuItem'
+          format: int64
+        userId:
+          type: integer
+          format: int64
+        status:
+          type: string
+        date:
+          type: string
+          format: date-time
         total:
           type: number
           format: float
-        status:
-          type: string
-          enum:
-            - получен
-            - готовится
-            - готов
-            - доставлен
-    User:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderItem'
+
+    OrderItem:
       type: object
       properties:
+        dishId:
+          type: integer
+          format: int64
+        quantity:
+          type: integer
+
+    Review:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
         userId:
           type: integer
-        name:
+          format: int64
+        orderId:
+          type: integer
+          format: int64
+        rating:
+          type: integer
+        comment:
           type: string
-        email:
-          type: string
-        phone:
-          type: string
-    Login:
-      type: object
-      properties:
-        email:
-          type: string
-        password:
-          type: string
-    UserPatch:
-      type: object
-      properties:
-        name:
-          type: string
-          nullable: true
-        email:
-          type: string
-          nullable: true
-        phone:
-          type: string
-          nullable: true          
- ---
+          ---
