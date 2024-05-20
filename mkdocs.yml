@@ -67,14 +67,11 @@ nav:
   - Домашняя страница:
     - index.md
   - Документация:
-    - index.md
+    - info.md
+    - goals.md
     - glossary.md
-    - general_info.md
-    - goal.md
-    - about_object.md
-    - business_process.md
-    - sr.md
+    - req.md
+    - uc.md
     - information_model.md
     - architecture.md
-    - ui.md
     - api.md
