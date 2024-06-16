@@ -62,6 +62,4 @@
  # Функциональные требования
  
  Основные функции системы представлены в виде UseCase диаграммы.
- 
- ```plantuml
-!include docs/diagrams/src/uc.puml
+ ![UseCase диаграмма](docs/assets/images/uc.svg)
