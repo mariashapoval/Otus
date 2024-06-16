@@ -2,12 +2,7 @@
 
 ## Концептуальная модель данных
 
-![Концептуальная модель данных](docs/diagrams/src/cmd.puml)
-
-```plantuml
-@startuml
-!include docs/diagrams/src/cmd.puml
-@enduml
+![Концептуальная модель данных](docs/assets/images/cmd.svg)
 
 ## Логическая модель данных
 
@@ -21,9 +16,4 @@
 
 ## Физическая модель данных для всех сервисов
 
-![Физическая модель данных для всех сервисов](docs/diagrams/src/phmd.puml)
-
-```plantuml
-@startuml
-!include docs/diagrams/src/phmd.puml
-@enduml
+![Физическая модель данных для всех сервисов](docs/assets/images/phmd.svg)
