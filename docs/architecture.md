@@ -32,9 +32,4 @@
 
 ### Модель С4
 
-![Модель С4](docs/diagrams/src/c4.puml)
-
-```plantuml
-@startuml
-!include docs/diagrams/src/c4.puml
-@enduml
+![Модель С4](docs/assets/images/c4.svg)
