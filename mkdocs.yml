@@ -3,6 +3,7 @@ plugins:
       separator: '[\s\-,:!=\[\]()"/]+|(?!\b)(?=[A-Z][a-z])|\.(?!\d)|&[lg]t;'
   - swagger-ui-tag
   - mermaid2
+  - plantuml_markdown
  # - glightbox      
 
 # Project information
