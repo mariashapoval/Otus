@@ -485,4 +485,3 @@ components:
         дата:
           type: string
           format: date-time
----          
