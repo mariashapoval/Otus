@@ -8,8 +8,6 @@ info:
     name: 'Maria Shapoval'
     email: "maria.shapoval95@gmail.com"
 servers:
-  - description: SwaggerHub API Auto Mocking
-    url: https://virtserver.swaggerhub.com/mariashapoval/course_project/07.06
   - url: https://api.robotdot.com/v1
     description: prod
   - url: https://api-test.robotdot.com/v1
