@@ -12,6 +12,8 @@ servers:
     description: prod
   - url: https://api-test.robotdot.com/v1
     description: test    
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/mariashapoval/course_project/07.06
 tags:
   - name: Пользователи
     description: Работа с пользователями
