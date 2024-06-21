@@ -74,4 +74,4 @@
  
  Основные функции системы представлены в виде UseCase диаграммы.
  
- ![UseCase диаграмма](docs/diagrams/include/uc.svg)
+ ![](diagrams/include/uc.svg)
