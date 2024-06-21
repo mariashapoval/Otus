@@ -34,4 +34,4 @@
 
 ### Модель С4
 
-![Модель С4](assets/images/c4.svg)
+![Модель С4](docs/diagrams/include/c4.svg)
