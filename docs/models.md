@@ -2,7 +2,7 @@
 
 ## Концептуальная модель данных
 
-![Концептуальная модель данных](docs/diagrams/include/cmd.svg)
+![](diagrams/include/cmd.svg)
 
 ## Логическая модель данных
 
@@ -16,4 +16,4 @@
 
 ## Физическая модель данных для всех сервисов
 
-![Физическая модель данных для всех сервисов](docs/diagrams/include/phmd.svg)
+![](diagrams/include/phmd.svg)
