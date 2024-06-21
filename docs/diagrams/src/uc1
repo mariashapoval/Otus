@@ -4,6 +4,7 @@
 !define RECTANGLE_BORDER_COLOR #1b365d
 !define ACTOR_COLOR #385f9e
 !define ACTOR_TEXT_COLOR #ffffff
+!define ACTIVATE_COLOR #d9e6f2
 
 skinparam rectangle {
     BackgroundColor RECTANGLE_COLOR
@@ -14,6 +15,11 @@ skinparam rectangle {
 skinparam actor {
     BackgroundColor ACTOR_COLOR
     FontColor ACTOR_TEXT_COLOR
+}
+
+skinparam {
+    SequenceLifeLineBackgroundColor ACTIVATE_COLOR
+    SequenceLifeLineBorderColor RECTANGLE_BORDER_COLOR
 }
 
 actor Пользователь
