@@ -1,0 +1,74 @@
+@startuml
+!define RECTANGLE_COLOR #1168bd
+!define RECTANGLE_TEXT_COLOR #ffffff
+!define RECTANGLE_BORDER_COLOR #1b365d
+!define ACTOR_COLOR #385f9e
+!define ACTOR_TEXT_COLOR #ffffff
+!define ACTIVATE_COLOR #d9e6f2
+!define TERMINAL_COLOR #DDDDDD
+!define TERMINAL_BORDER_COLOR black
+!define TERMINAL_TEXT_COLOR black
+
+skinparam rectangle {
+    BackgroundColor RECTANGLE_COLOR
+    BorderColor RECTANGLE_BORDER_COLOR
+    FontColor RECTANGLE_TEXT_COLOR
+}
+
+skinparam actor {
+    BackgroundColor ACTOR_COLOR
+    FontColor ACTOR_TEXT_COLOR
+}
+
+skinparam {
+    SequenceLifeLineBackgroundColor ACTIVATE_COLOR
+    SequenceLifeLineBorderColor RECTANGLE_BORDER_COLOR
+    SequenceParticipantBackgroundColor TERMINAL_COLOR
+    SequenceParticipantBorderColor TERMINAL_BORDER_COLOR
+    SequenceParticipantFontColor TERMINAL_TEXT_COLOR
+    SequenceArrowColor black
+    SequenceArrowFontColor black
+    SequenceArrowFontSize 12
+}
+
+actor Посетитель as Visitor
+participant "Терминал" as Terminal
+participant "Система управления меню" as MenuSystem
+
+activate Visitor
+Visitor -> Terminal: Активирует терминал и начинает сессию
+activate Terminal
+Terminal -> Visitor: Отображает список доступных категорий меню
+Visitor -> Terminal: Выбирает категорию
+Terminal -> MenuSystem: Запрашивает список блюд в категории
+activate MenuSystem
+MenuSystem -> Terminal: Отправляет список блюд
+deactivate MenuSystem
+Terminal -> Visitor: Отображает список блюд
+Visitor -> Terminal: Выбирает блюдо и настраивает его по своему вкусу, указывает количество
+Terminal -> MenuSystem: Запрашивает информацию о выбранном блюде
+activate MenuSystem
+MenuSystem -> Terminal: Возвращает информацию о блюде (ингредиенты, калорийность, цена)
+deactivate MenuSystem
+Terminal -> Visitor: Отображает подробную информацию о блюде
+Visitor -> Terminal: Добавляет блюдо в корзину
+Terminal -> Visitor: Обновляет корзину заказа
+
+alt Блюдо недоступно
+    Terminal -> MenuSystem: Запрашивает информацию о выбранном блюде
+    activate MenuSystem
+    MenuSystem -> Terminal: Сообщает, что блюдо недоступно
+    deactivate MenuSystem
+    Terminal -> Visitor: Отображает сообщение об ошибке: "Извините, выбранное блюдо недоступно. Пожалуйста, выберите другое блюдо."
+end
+
+alt Сбой в работе терминала
+    Terminal -> Visitor: Терминал неожиданно перестает отвечать на действия пользователя
+    Terminal -> Visitor: Отображает сообщение об ошибке: "Извините, произошел сбой в системе. Пожалуйста, обратитесь к персоналу за помощью."
+end
+
+Visitor -> Terminal: Продолжает выбор блюд или переходит к оформлению заказа
+deactivate Terminal
+deactivate Visitor
+
+@enduml
