@@ -1,0 +1,54 @@
+@startuml
+skinparam participant {
+    BackgroundColor #F8F8F8
+    BorderColor #A9A9A9
+    FontColor black
+}
+skinparam actor {
+    BackgroundColor #4472C4
+    BorderColor #2F5597
+    FontColor black
+}
+skinparam database {
+    BackgroundColor #F8F8F8
+    BorderColor #A9A9A9
+    FontColor black
+}
+skinparam sequence {
+    ArrowColor black
+    LifeLineBorderColor #1168bd
+    LifeLineBackgroundColor #DAE8FC
+    ActorBorderColor #2F5597
+    ActorBackgroundColor #4472C4
+}
+
+actor Пользователь
+participant "Форма входа" as Form
+participant "Система аутентификации" as AuthSystem
+Database "База данных" as DB
+
+activate Пользователь #DAE8FC
+Пользователь -> Form: Нажимает на кнопку «Войти»
+activate Form #DAE8FC
+Form -> Пользователь: Отображает форму для ввода данных, включая поле для ввода номера телефона и кнопку "Войти"
+Пользователь -> Form: Вводит номер телефона
+Пользователь -> Form: Нажимает на кнопку "Войти"
+Form -> DB: Проверяет номер телефона в базе данных
+activate DB #DAE8FC
+alt Номер существует в базе данных
+    DB -> Form: Номер телефона найден
+    deactivate DB #DAE8FC
+    Form -> AuthSystem: Аутентифицирует пользователя
+    activate AuthSystem #DAE8FC
+    AuthSystem -> Form: Аутентификация успешна
+    deactivate AuthSystem #DAE8FC
+    Form -> Пользователь: Предоставляет доступ к профилю пользователя
+else Номер не существует в базе данных
+    DB -> Form: Номер телефона не найден
+    deactivate DB #DAE8FC
+    Form -> Пользователь: Отображает сообщение об ошибке: «Неверный номер телефона. Пожалуйста, проверьте введенные данные и попробуйте снова»
+    deactivate Form #DAE8FC
+    deactivate Пользователь #DAE8FC
+end
+
+@enduml
