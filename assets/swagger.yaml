@@ -1,0 +1,683 @@
+---
+{
+  "openapi" : "3.0.0",
+  "info" : {
+    "title" : "API системы управления заказами ресторана \"Робот и точка\"",
+    "version" : "07.06",
+    "description" : "Спецификация разработана в рамках курсового проекта по курсу \"Системный аналитик.Advanced\" в Otus. Данный пример предназначен для системы управления заказами в ресторане \"Робот и точка\".",
+    "contact" : {
+      "name" : "Maria Shapoval",
+      "email" : "maria.shapoval95@gmail.com"
+    }
+  },
+  "servers" : [ {
+    "description" : "SwaggerHub API Auto Mocking",
+    "url" : "https://virtserver.swaggerhub.com/mariashapoval/course_project/07.06"
+  }, {
+    "url" : "https://api.robotdot.com/v1",
+    "description" : "prod"
+  }, {
+    "url" : "https://api-test.robotdot.com/v1",
+    "description" : "test"
+  } ],
+  "tags" : [ {
+    "name" : "Пользователи",
+    "description" : "Работа с пользователями"
+  }, {
+    "name" : "Меню",
+    "description" : "Операции, связанные с пунктами меню"
+  }, {
+    "name" : "Заказы",
+    "description" : "Операции, связанные с заказами клиентов"
+  }, {
+    "name" : "Блюда",
+    "description" : "Операции, связанные с блюдами"
+  }, {
+    "name" : "Отзывы",
+    "description" : "Операции, связанные с отзывами"
+  } ],
+  "paths" : {
+    "/users/register" : {
+      "post" : {
+        "tags" : [ "Пользователи" ],
+        "summary" : "Регистрация нового пользователя",
+        "description" : "Метод позволяет зарегистрировать нового пользователя в системе",
+        "requestBody" : {
+          "required" : true,
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Register"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "201" : {
+            "description" : "Пользователь успешно зарегистрирован"
+          },
+          "400" : {
+            "description" : "Неверные данные"
+          },
+          "500" : {
+            "description" : "Внутренняя ошибка сервера"
+          }
+        }
+      }
+    },
+    "/users/login" : {
+      "post" : {
+        "tags" : [ "Пользователи" ],
+        "summary" : "Авторизация пользователя",
+        "description" : "Метод позволяет произвести авторизацию пользователя",
+        "requestBody" : {
+          "required" : true,
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Login"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Успешная авторизация",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Неверные учетные данные"
+          },
+          "500" : {
+            "description" : "Внутренняя ошибка сервера"
+          }
+        }
+      }
+    },
+    "/users/{userId}" : {
+      "get" : {
+        "tags" : [ "Пользователи" ],
+        "summary" : "Получение информации о профиле пользователя",
+        "parameters" : [ {
+          "name" : "userId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Данные профиля пользователя",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Пользователь не найден"
+          },
+          "500" : {
+            "description" : "Внутренняя ошибка сервера"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Пользователи" ],
+        "summary" : "Обновление информации профиля пользователя",
+        "parameters" : [ {
+          "name" : "userId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "requestBody" : {
+          "required" : true,
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/User"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Профиль пользователя обновлен"
+          },
+          "400" : {
+            "description" : "Неверный запрос, данные не прошли валидацию"
+          },
+          "404" : {
+            "description" : "Пользователь не найден"
+          },
+          "500" : {
+            "description" : "Внутренняя ошибка сервера"
+          }
+        }
+      },
+      "patch" : {
+        "tags" : [ "Пользователи" ],
+        "summary" : "Обновление данных профиля пользователя",
+        "description" : "Метод позволяет внести частичное обновление в данные пользователя",
+        "parameters" : [ {
+          "name" : "userId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "requestBody" : {
+          "required" : true,
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/UserPatch"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Данные профиля пользователя обновлены"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "Пользователи" ],
+        "summary" : "Удаление пользователя",
+        "parameters" : [ {
+          "name" : "userId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "Пользователь удален"
+          },
+          "404" : {
+            "description" : "Пользователь не найден"
+          },
+          "403" : {
+            "description" : "Отказ в доступе, недостаточно прав для выполнения операции"
+          },
+          "500" : {
+            "description" : "Внутренняя ошибка сервера"
+          }
+        }
+      }
+    },
+    "/menu" : {
+      "get" : {
+        "tags" : [ "Меню" ],
+        "summary" : "Получение текущего меню",
+        "responses" : {
+          "200" : {
+            "description" : "Список пунктов меню",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/MenuItem"
+                  }
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Внутренняя ошибка сервера"
+          }
+        }
+      }
+    },
+    "/dishes" : {
+      "get" : {
+        "tags" : [ "Блюда" ],
+        "summary" : "Получение списка блюд",
+        "responses" : {
+          "200" : {
+            "description" : "Список блюд",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/DishItem"
+                  }
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Внутренняя ошибка сервера"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "Блюда" ],
+        "summary" : "Добавление нового блюда",
+        "requestBody" : {
+          "required" : true,
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/DishItem"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "201" : {
+            "description" : "Блюдо добавлено"
+          },
+          "400" : {
+            "description" : "Неверные данные блюда"
+          },
+          "500" : {
+            "description" : "Внутренняя ошибка сервера"
+          }
+        }
+      }
+    },
+    "/dishes/{id}" : {
+      "get" : {
+        "tags" : [ "Блюда" ],
+        "summary" : "Получение информации о блюде",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Информация о блюде",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/DishItem"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Блюдо не найдено"
+          },
+          "500" : {
+            "description" : "Внутренняя ошибка сервера"
+          }
+        }
+      }
+    },
+    "/orders/{orderId}" : {
+      "get" : {
+        "tags" : [ "Заказы" ],
+        "summary" : "Получение информации о заказе",
+        "parameters" : [ {
+          "name" : "orderId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Информация о заказе",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Order"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Заказ не найден"
+          },
+          "500" : {
+            "description" : "Внутренняя ошибка сервера"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Заказы" ],
+        "summary" : "Обновление информации о заказе",
+        "parameters" : [ {
+          "name" : "orderId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "requestBody" : {
+          "required" : true,
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/OrderRequest"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Заказ обновлен"
+          },
+          "400" : {
+            "description" : "Неверный запрос, данные заказа не корректны"
+          },
+          "404" : {
+            "description" : "Заказ не найден"
+          },
+          "500" : {
+            "description" : "Внутренняя ошибка сервера"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "Заказы" ],
+        "summary" : "Удаление заказа",
+        "parameters" : [ {
+          "name" : "orderId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "Заказ успешно удален"
+          },
+          "404" : {
+            "description" : "Заказ не найден"
+          },
+          "403" : {
+            "description" : "Отказ в доступе, недостаточно прав для выполнения операции"
+          },
+          "500" : {
+            "description" : "Внутренняя ошибка сервера"
+          }
+        }
+      }
+    },
+    "/reviews" : {
+      "get" : {
+        "tags" : [ "Отзывы" ],
+        "summary" : "Получить отзывы",
+        "description" : "Получить все отзывы",
+        "responses" : {
+          "200" : {
+            "description" : "Список отзывов",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/Review"
+                  }
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Внутренняя ошибка сервера"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "Отзывы" ],
+        "summary" : "Оставить отзыв",
+        "description" : "Оставить отзыв на блюдо",
+        "requestBody" : {
+          "required" : true,
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Review"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "201" : {
+            "description" : "Отзыв успешно оставлен"
+          },
+          "400" : {
+            "description" : "Неверные данные"
+          },
+          "500" : {
+            "description" : "Внутренняя ошибка сервера"
+          }
+        }
+      }
+    },
+    "/reviews/{id}" : {
+      "get" : {
+        "tags" : [ "Отзывы" ],
+        "summary" : "Получить отзыв",
+        "description" : "Получить отзыв по ID",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Информация об отзыве",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Review"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Отзыв не найден"
+          },
+          "500" : {
+            "description" : "Внутренняя ошибка сервера"
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "MenuItem" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "integer"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "description" : {
+            "type" : "string"
+          },
+          "price" : {
+            "type" : "number",
+            "format" : "float"
+          }
+        }
+      },
+      "DishItem" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "integer"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "description" : {
+            "type" : "string"
+          },
+          "price" : {
+            "type" : "number",
+            "format" : "float"
+          },
+          "category" : {
+            "type" : "string"
+          }
+        }
+      },
+      "OrderRequest" : {
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "type" : "object",
+              "properties" : {
+                "itemId" : {
+                  "type" : "integer"
+                },
+                "quantity" : {
+                  "type" : "integer"
+                }
+              }
+            }
+          },
+          "deliveryMode" : {
+            "type" : "string",
+            "enum" : [ "самовывоз", "на месте" ]
+          }
+        }
+      },
+      "Order" : {
+        "type" : "object",
+        "properties" : {
+          "orderId" : {
+            "type" : "integer"
+          },
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/MenuItem"
+            }
+          },
+          "total" : {
+            "type" : "number",
+            "format" : "float"
+          },
+          "status" : {
+            "type" : "string",
+            "enum" : [ "получен", "готовится", "готов", "доставлен" ]
+          }
+        }
+      },
+      "User" : {
+        "type" : "object",
+        "properties" : {
+          "userId" : {
+            "type" : "integer"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "email" : {
+            "type" : "string"
+          },
+          "phone" : {
+            "type" : "string"
+          }
+        }
+      },
+      "Register" : {
+        "type" : "object",
+        "properties" : {
+          "name" : {
+            "type" : "string"
+          },
+          "phone" : {
+            "type" : "string"
+          },
+          "email" : {
+            "type" : "string"
+          },
+          "password" : {
+            "type" : "string"
+          }
+        }
+      },
+      "Login" : {
+        "type" : "object",
+        "properties" : {
+          "email" : {
+            "type" : "string"
+          },
+          "password" : {
+            "type" : "string"
+          }
+        }
+      },
+      "UserPatch" : {
+        "type" : "object",
+        "properties" : {
+          "name" : {
+            "type" : "string",
+            "nullable" : true
+          },
+          "email" : {
+            "type" : "string",
+            "nullable" : true
+          },
+          "phone" : {
+            "type" : "string",
+            "nullable" : true
+          }
+        }
+      },
+      "Review" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "integer"
+          },
+          "id_пользователь" : {
+            "type" : "integer"
+          },
+          "id_блюдо" : {
+            "type" : "integer"
+          },
+          "рейтинг" : {
+            "type" : "integer"
+          },
+          "комментарий" : {
+            "type" : "string"
+          },
+          "дата" : {
+            "type" : "string",
+            "format" : "date-time"
+          }
+        }
+      }
+    }
+  }
+}

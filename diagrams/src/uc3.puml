@@ -1,0 +1,51 @@
+@startuml
+!define RECTANGLE #DDDDDD
+skinparam rectangle {
+  BackgroundColor RECTANGLE
+  BorderColor black
+  FontColor black
+}
+skinparam actor {
+  BackgroundColor #4D89C6
+  BorderColor black
+  FontColor black
+}
+skinparam sequence {
+  LifeLineBackgroundColor RECTANGLE
+  LifeLineBorderColor black
+  LifeLineFontColor black
+  LifeLineFontSize 12
+  ArrowColor black
+  ArrowFontColor black
+  ArrowFontSize 12
+}
+
+actor Посетитель as Visitor
+participant "Терминал" as Terminal
+database "Система управления Меню" as MenuSystem
+
+activate Visitor
+Visitor -> Terminal: Активирует терминал через сенсорный экран
+activate Terminal
+Terminal -> Visitor: Отображает приветственное сообщение и предлагает выбрать язык интерфейса
+Visitor -> Terminal: Выбирает предпочитаемый язык
+Terminal -> MenuSystem: Запрашивает загрузку меню
+activate MenuSystem
+MenuSystem -> Terminal: Отправляет данные меню
+deactivate MenuSystem
+Terminal -> Visitor: Отображает меню (категории блюд, акции)
+Visitor -> Terminal: Просматривает категории и выбирает блюдо
+Terminal -> Visitor: Предоставляет детальную информацию по выбранному блюду (ингредиенты, цена, калорийность)
+
+alt Техническая проблема при загрузке меню
+  Terminal -> MenuSystem: Запрашивает загрузку меню
+  activate MenuSystem
+  MenuSystem -> Terminal: Возникает ошибка загрузки
+  deactivate MenuSystem
+  Terminal -> Visitor: Отображает сообщение об ошибке: "Извините, не удалось загрузить меню. Пожалуйста, попробуйте позже или обратитесь к нашему персоналу за помощью."
+end
+
+Visitor -> Terminal: Пользователь возвращается к списку категорий или завершает просмотр и выходит из системы
+deactivate Terminal
+deactivate Visitor
+@enduml
