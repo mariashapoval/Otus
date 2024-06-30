@@ -1,9 +1,3 @@
-plugins:
-  - search:
-      separator: '[\s\-,:!=\[\]()"/]+|(?!\b)(?=[A-Z][a-z])|\.(?!\d)|&[lg]t;'
-  - swagger-ui-tag
-  - mermaid2
-
 site_name: Проектирование информационной системы для сети роботизированных ресторанов "Робот и точка"
 
 repo_name: mariashapoval/Otus
@@ -27,18 +21,20 @@ theme:
     - content.code.copy
   language: ru
   palette:
-    - scheme: pink
+    - scheme: default
       toggle:
         icon: material/toggle-switch-off-outline
-        name: Switch to dark mode
-      primary: pink
-      accent: white
-    - scheme: violet
+        name: Переключиться на тёмную тему
+      primary: blue
+      accent: violet
+      background: blue
+    - scheme: slate
       toggle:
         icon: material/toggle-switch
-        name: Switch to light mode
+        name: Переключиться на светлую тему
       primary: violet
-      accent: lavender
+      accent: darkgreen
+      background: darkgreen
 
 markdown_extensions:
   - pymdownx.emoji:
@@ -69,7 +65,8 @@ nav:
     - glossary.md
     - brs.md
     - req.md
-    - uc.md
     - models.md
     - architecture.md
     - api.md
+  - Задачи:
+    - uc.md
