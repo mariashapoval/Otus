@@ -59,6 +59,11 @@ markdown_extensions:
       custom_fences:
         - name: mermaid
 
+plugins:
+  - search
+  - swagger-ui-tag
+  - mermaid2
+
 nav:
   - Домашняя страница:
     - index.md
