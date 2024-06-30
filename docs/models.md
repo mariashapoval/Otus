@@ -2,7 +2,7 @@
 
 ## Концептуальная модель данных
 
-<img src="diagrams/include/cmd.svg" alt="Концептуальная модель данных" style="width:150%;">
+<img src="diagrams/include/cmd.svg" alt="Концептуальная модель данных" style="width:160%;">
 
 ## Логическая модель данных
 
@@ -16,4 +16,4 @@
 
 ## Физическая модель данных для всех сервисов
 
-<img src="diagrams/include/phmd.svg" alt="Физическая модель данных" style="width:80%;">
+<img src="diagrams/include/phmd.svg" alt="Физическая модель данных" style="width:70%;">
