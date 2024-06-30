@@ -34,4 +34,4 @@
 
 ### Модель С4
 
-![](diagrams/include/c4.svg)
+<img src="diagrams/include/c4.svg" alt="C4 Diagram" style="width:300%;">
