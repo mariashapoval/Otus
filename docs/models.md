@@ -9,7 +9,7 @@
 | Сервис              | Модель       | 
 |------------------------|------------------|
 | **Сервис Пользователей**     | ![](docs/assets/images/users.PNG) | 
-| **Сервис Заказов** | ![](docs/assets/images/orders.PNG) |
+| **Сервис Заказов** | ![](diagrams/include/orders.svg) |
 | **Сервис меню**        | ![](docs/assets/images/menu.PNG) |
 | **Сервис склада**     | ![](docs/assets/images/store.PNG) |
 | **Сервис отзывов**     | ![](docs/assets/images/review.PNG) |
