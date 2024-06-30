@@ -20,7 +20,7 @@
 | Исключения                 | Номер телефона уже используется в системе.                                                   |
 | Частота использования      | По мере появления новых пользователей.                                                        |
 | Диаграмма                  | ![](diagrams/include/uc1.svg)                  |
-| Макеты                     | <img src="assets/images/protUC1.PNG" alt="UC1 Mockups" style="width: 50%;"> |
+| Макеты                     | <img src="assets/images/protUC1.PNG" alt="protUC1 Mockups" style="width: 50%;"> |
 
 #### Задача 1.1: Реализация интерфейса регистрации
 
