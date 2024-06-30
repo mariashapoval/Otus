@@ -23,6 +23,6 @@ jobs:
       - run: pip install mkdocs-mermaid2-plugin
       - run: pip install pillow cairosvg
       - run: pip install beautifulsoup4>=4.11.1
-      - run: pip install mkdocs-swagger-ui-tag      # Render Swagger
+      - run: pip install mkdocs-swagger-ui-tag
       - run: pip3 install mkdocs-enumerate-headings-plugin
       - run: mkdocs gh-deploy --force
