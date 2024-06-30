@@ -2,18 +2,18 @@
 
 ## Концептуальная модель данных
 
-![](diagrams/include/cmd.svg)
+<img src="diagrams/include/cmd.svg" alt="Концептуальная модель данных" style="width:150%;">
 
 ## Логическая модель данных
 
 | Сервис              | Модель       | 
 |------------------------|------------------|
-| **Сервис Пользователей**     | ![](diagrams/include/users.svg) | 
-| **Сервис Заказов** | ![](diagrams/include/orders.svg) |
-| **Сервис меню**        | ![](diagrams/include/menu.svg) |
-| **Сервис склада**     | ![](diagrams/include/store.svg)  |
-| **Сервис отзывов**     | ![](diagrams/include/review.svg) |
+| **Сервис Пользователей**     | <img src="diagrams/include/users.svg" alt="Сервис Пользователей" style="width:30%;"> | 
+| **Сервис Заказов** | <img src="diagrams/include/orders.svg" alt="Сервис Заказов" style="width:30%;"> |
+| **Сервис меню**        | <img src="diagrams/include/menu.svg" alt="Сервис меню" style="width:30%;"> |
+| **Сервис склада**     | <img src="diagrams/include/store.svg" alt="Сервис склада" style="width:30%;"> |
+| **Сервис отзывов**     | <img src="diagrams/include/review.svg" alt="Сервис отзывов" style="width:30%;"> |
 
 ## Физическая модель данных для всех сервисов
 
-![](diagrams/include/phmd.svg)
+<img src="diagrams/include/phmd.svg" alt="Физическая модель данных" style="width:80%;">
