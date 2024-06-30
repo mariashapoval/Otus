@@ -27,7 +27,7 @@ theme:
         name: Переключиться на тёмную тему
       primary: blue
       accent: violet
-      background: blue
+      background: white  # Белый фон для светлой темы
     - scheme: slate
       toggle:
         icon: material/toggle-switch
@@ -35,6 +35,9 @@ theme:
       primary: violet
       accent: darkgreen
       background: darkgreen
+
+extra_css:
+  - stylesheets/extra.css  # Подключение дополнительного CSS-файла
 
 markdown_extensions:
   - pymdownx.emoji:
