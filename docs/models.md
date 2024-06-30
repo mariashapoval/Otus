@@ -11,8 +11,8 @@
 | **Сервис Пользователей**     | ![](docs/assets/images/users.PNG) | 
 | **Сервис Заказов** | ![](docs/assets/images/orders.PNG) |
 | **Сервис меню**        | ![](docs/assets/images/menu.PNG) |
-| **Сервис склада**     | ![Сервис склада](docs/assets/images/Сервис склада.PNG) |
-| **Сервис отзывов**     | ![Сервис отзывов](docs/assets/images/Сервис отзывов.PNG) |
+| **Сервис склада**     | ![](docs/assets/images/store.PNG) |
+| **Сервис отзывов**     | ![](docs/assets/images/review.PNG) |
 
 ## Физическая модель данных для всех сервисов
 
