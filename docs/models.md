@@ -8,11 +8,11 @@
 
 | Сервис              | Модель       | 
 |------------------------|------------------|
-| **Сервис Пользователей**     | ![](/assets/images/users.PNG) | 
+| **Сервис Пользователей**     | ![](diagrams/include/users.svg) | 
 | **Сервис Заказов** | ![](diagrams/include/orders.svg) |
-| **Сервис меню**        | ![](docs/assets/images/menu.PNG) |
-| **Сервис склада**     | ![](docs/assets/images/store.PNG) |
-| **Сервис отзывов**     | ![](docs/assets/images/review.PNG) |
+| **Сервис меню**        | ![](diagrams/include/menu.svg) |
+| **Сервис склада**     | ![](diagrams/include/store.svg)  |
+| **Сервис отзывов**     | ![](diagrams/include/review.svg) |
 
 ## Физическая модель данных для всех сервисов
 
