@@ -19,3 +19,4 @@
 
 ![BPMN диаграмма](/diagrams/include/bpmn.svg)
 
+<img src="diagrams/include/bpmn.svg" alt="BPMN диаграмма" style="width:300%;">
