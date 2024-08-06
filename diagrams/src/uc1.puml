@@ -1,0 +1,65 @@
+@startuml
+!define RECTANGLE_COLOR #1168bd
+!define RECTANGLE_TEXT_COLOR #ffffff
+!define RECTANGLE_BORDER_COLOR #1b365d
+!define ACTOR_COLOR #385f9e
+!define ACTOR_TEXT_COLOR #ffffff
+!define ACTIVATE_COLOR #d9e6f2
+
+skinparam rectangle {
+    BackgroundColor RECTANGLE_COLOR
+    BorderColor RECTANGLE_BORDER_COLOR
+    FontColor RECTANGLE_TEXT_COLOR
+}
+
+skinparam actor {
+    BackgroundColor ACTOR_COLOR
+    FontColor ACTOR_TEXT_COLOR
+}
+
+skinparam {
+    SequenceLifeLineBackgroundColor ACTIVATE_COLOR
+    SequenceLifeLineBorderColor RECTANGLE_BORDER_COLOR
+}
+
+actor Пользователь
+participant "Форма регистрации" as Form
+participant "Система аутентификации" as AuthSystem
+database "База данных" as DB
+participant "Сервис SMS" as SMS
+
+activate Пользователь
+Пользователь -> Form: Выбирает опцию регистрации
+activate Form
+Form -> Пользователь: Отображает форму для ввода данных
+Пользователь -> Form: Вводит данные (имя, номер телефона)
+Form -> DB: Проверяет номер в базе данных
+activate DB
+
+alt Номер не зарегистрирован
+    DB -> Form: Номер не зарегистрирован
+    deactivate DB
+    Form -> SMS: Отправляет SMS с кодом подтверждения
+    activate SMS
+    SMS -> Пользователь: Получает SMS с кодом подтверждения
+    deactivate SMS
+    Пользователь -> Form: Вводит код подтверждения
+    Form -> AuthSystem: Проверяет код
+    activate AuthSystem
+    AuthSystem -> Form: Код подтвержден
+    deactivate AuthSystem
+    Form -> DB: Регистрирует пользователя
+    activate DB
+    DB -> Form: Пользователь зарегистрирован
+    deactivate DB
+    Form -> Пользователь: Регистрация завершена
+
+else Номер уже зарегистрирован
+    DB -> Form: Номер зарегистрирован
+    deactivate DB
+    Form -> Пользователь: Отображает сообщение об ошибке: «Этот номер телефона уже используется. Пожалуйста, введите другой номер»
+    deactivate Form
+    deactivate Пользователь
+
+end
+@enduml

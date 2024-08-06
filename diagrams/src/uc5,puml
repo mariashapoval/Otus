@@ -1,0 +1,74 @@
+@startuml
+!define RECTANGLE_COLOR #1168bd
+!define RECTANGLE_TEXT_COLOR #ffffff
+!define RECTANGLE_BORDER_COLOR #1b365d
+!define ACTOR_COLOR #385f9e
+!define ACTOR_TEXT_COLOR #ffffff
+!define ACTIVATE_COLOR #d9e6f2
+
+skinparam rectangle {
+    BackgroundColor RECTANGLE_COLOR
+    BorderColor RECTANGLE_BORDER_COLOR
+    FontColor RECTANGLE_TEXT_COLOR
+}
+
+skinparam actor {
+    BackgroundColor ACTOR_COLOR
+    FontColor ACTOR_TEXT_COLOR
+}
+
+skinparam {
+    SequenceLifeLineBackgroundColor ACTIVATE_COLOR
+    SequenceLifeLineBorderColor RECTANGLE_BORDER_COLOR
+    SequenceArrowColor black
+}
+
+actor Посетитель
+participant "Терминал" as Terminal
+participant "Система управления заказами" as OrderSystem
+participant "Платежная система" as PaymentSystem
+
+activate Посетитель
+Посетитель -> Terminal: Переходит к оформлению заказа
+activate Terminal
+Terminal -> Посетитель: Отображает список всех выбранных блюд с их стоимостью и общей суммой заказа
+Посетитель -> Terminal: Изменяет количество блюд или удаляет их из корзины (при необходимости)
+Посетитель -> Terminal: Подтверждает выбор блюд
+Terminal -> Посетитель: Запрашивает ввод контактных данных и выбор метода доставки (если необходимо)
+Посетитель -> Terminal: Вводит контактные данные и выбирает метод доставки (если необходимо)
+Terminal -> Посетитель: Предлагает выбрать метод оплаты (наличные, кредитная карта, электронные платежи)
+Посетитель -> Terminal: Выбирает предпочтительный метод оплаты
+Terminal -> PaymentSystem: Обрабатывает транзакцию
+activate PaymentSystem
+PaymentSystem -> Terminal: Подтверждает успешную оплату
+deactivate PaymentSystem
+Terminal -> OrderSystem: Передает заказ для дальнейшей обработки
+activate OrderSystem
+OrderSystem -> Terminal: Подтверждает регистрацию заказа
+deactivate OrderSystem
+Terminal -> Посетитель: Выдает подтверждение заказа и чек
+Terminal -> Посетитель: Предоставляет дополнительные инструкции по получению заказа (если необходимо)
+
+
+alt Проблема с платежной транзакцией
+    Terminal -> PaymentSystem: Обрабатывает транзакцию
+    activate PaymentSystem
+    PaymentSystem -> Terminal: Ошибка при обработке платежа
+    deactivate PaymentSystem
+    Terminal -> Посетитель: Отображает сообщение об ошибке: "Ошибка при обработке платежа. Пожалуйста, попробуйте снова или выберите другой способ оплаты."
+    Посетитель -> Terminal: Повторяет платеж или выбирает другой способ оплаты
+    Terminal -> PaymentSystem: Обрабатывает повторную транзакцию
+    activate PaymentSystem
+    PaymentSystem -> Terminal: Подтверждает успешную оплату
+    deactivate PaymentSystem
+    Terminal -> OrderSystem: Передает заказ для дальнейшей обработки
+    activate OrderSystem
+    OrderSystem -> Terminal: Подтверждает регистрацию заказа
+    deactivate OrderSystem
+    Terminal -> Посетитель: Выдает подтверждение заказа и чек
+    Terminal -> Посетитель: Предоставляет дополнительные инструкции по получению заказа (если необходимо)
+    deactivate Terminal
+    deactivate Посетитель
+end
+
+@enduml
